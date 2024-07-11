@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</Rock-Paper-Scissors></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
-    <script src="script.js"></script>
+<body class="centre-object">
+    <div id="game-ui">
+        <div id="title">
+            <h1>Rock-Paper-Scissors</h1>
+        </div>
+        <div id="scoreboard">
+            <div class="score-card centre-object">
+                <p>Player Score</p>
+                <p class="score-box centre-object">0</p>
+            </div>
+            <div class="score-card centre-object">
+                <p>Computer Score</p>
+                <p class="score-box centre-object">0</p>
+            </div>
+        </div>
+        <div id="result-box">
+            <p>Let's Play Rock-Paper-Scissors!</p>
+        </div>
+        <div class="centre-object" id="button-box">
+            <button class="btn" id="rock-btn">Rock</button>
+            <button class="btn" id="paper-btn">Paper</button>
+            <button class="btn" id="scissor-btn">Scissors</button>
+        </div>
+    </div>
 </body>
 </html>
