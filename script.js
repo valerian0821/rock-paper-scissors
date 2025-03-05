@@ -33,7 +33,7 @@ function playRound(humanChoice, computerChoice) {
         if (humanChoice != computerChoice) {
             foundWinner = true;
         } else {
-            display.textContent = "It is a draw. Please go again.";
+            display.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. It is a draw. Please go again.`;
             return;
         }
     }
@@ -66,43 +66,64 @@ function playRound(humanChoice, computerChoice) {
     if (humanWeight > computerWeight) {
         humanScore++;
         playerScore.textContent = `${humanScore}`;
-        display.textContent = `${humanChoice} beats ${computerChoice}! You have WON the round!`;
+        display.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. You have WON the round!`;
     } else {
         computerScore++;
         compScore.textContent = `${computerScore}`;
-        display.textContent = `${computerChoice} beats ${humanChoice}! You have LOST the round!`;
+        display.textContent = `You chose ${humanChoice}. The computer chose ${computerChoice}. You have LOST the round!`;
     }
-    if (humanScore + computerScore == 5) {
+    if (humanScore == 5 || computerScore == 5) {
         if (humanScore > computerScore) {
             display.textContent = "You have WON the game!";
         } else {
-            display.textContent = "You have LOST the game";
+            display.textContent = "You have LOST the game!";
         }
     } 
 }
 
 function startGame() {
-    rockBtn.addEventListener("click", function chooseRock() {
-        if (humanScore + computerScore == 5) {
-            rockBtn.removeEventListener("click", chooseRock);
-        } else {
-            playRound("Rock", getComputerChoice());
-        }  
-    });
-    paperBtn.addEventListener("click", function choosePaper() { 
-        if (humanScore + computerScore == 5) {
-            paperBtn.removeEventListener("click", choosePaper);
-        } else {
-            playRound("Paper", getComputerChoice());
-        }
-    });
-    scissorsBtn.addEventListener("click", function chooseScissors() {  
-        if (humanScore + computerScore == 5) {
-            scissorsBtn.removeEventListener("click", chooseScissors);
-        } else {
-            playRound("Scissors", getComputerChoice());
-        }
-    });
+    rockBtn.addEventListener("click", chooseRock);
+    paperBtn.addEventListener("click", choosePaper);
+    scissorsBtn.addEventListener("click", chooseScissors);
+}
+
+ function chooseRock() {
+    if (humanScore == 5 || computerScore == 5) {
+        rockBtn.removeEventListener("click", chooseRock);
+        paperBtn.removeEventListener("click", choosePaper);
+        scissorsBtn.removeEventListener("click", chooseScissors);
+    } else {
+        playRound("Rock", getComputerChoice());
+    }  
+}
+
+function choosePaper() {
+    if (humanScore == 5 || computerScore == 5) {
+        rockBtn.removeEventListener("click", chooseRock);
+        paperBtn.removeEventListener("click", choosePaper);
+        scissorsBtn.removeEventListener("click", chooseScissors);
+    } else {
+        playRound("Paper", getComputerChoice());
+    }
+}
+
+function chooseScissors() {
+    if (humanScore == 5 || computerScore == 5) {
+        rockBtn.removeEventListener("click", chooseRock);
+        paperBtn.removeEventListener("click", choosePaper);
+        scissorsBtn.removeEventListener("click", chooseScissors);
+    } else {
+        playRound("Scissors", getComputerChoice());
+    }
+}
+
+function restartGame () {
+    humanScore = 0;
+    computerScore = 0;
+    playerScore.textContent = `${humanScore}`;
+    compScore.textContent = `${computerScore}`;
+    display.textContent = "Let's Play Rock-Paper-Scissors!";
+    startGame();
 }
 
 let humanScore = 0;
@@ -111,7 +132,9 @@ const playerScore = document.querySelector("#player-score");
 const compScore = document.querySelector("#computer-score");
 const result = document.querySelector("#result-box");
 const display = document.querySelector("#result-display");
-let rockBtn = document.querySelector("#rock-btn");
-let paperBtn = document.querySelector("#paper-btn");
-let scissorsBtn = document.querySelector("#scissors-btn");
+const rockBtn = document.querySelector("#rock-btn");
+const paperBtn = document.querySelector("#paper-btn");
+const scissorsBtn = document.querySelector("#scissors-btn");
+const restartBtn = document.querySelector("#restart-btn");
+restartBtn.addEventListener("click", restartGame);
 startGame();
